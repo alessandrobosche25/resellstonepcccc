@@ -39,11 +39,11 @@ export default function AdminDashboard() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 px-4 py-2.5 bg-muted text-muted-foreground rounded-xl text-sm font-medium hover:bg-accent transition-colors border border-border">
+              <button className="flex items-center gap-2 px-4 py-2.5 bg-muted text-muted-foreground rounded-xl text-sm font-semibold hover:bg-accent transition-colors border border-border/60">
                 <Calendar className="h-4 w-4" />
                 <span>Ultimi 30 giorni</span>
               </button>
-              <button className="flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:bg-primary/90 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2.5 bg-[#6033E1] text-white rounded-xl text-sm font-bold hover:bg-[#4f29b8] transition-all shadow-md hover:shadow-lg">
                 <Download className="h-4 w-4" />
                 <span>Esporta Report</span>
               </button>

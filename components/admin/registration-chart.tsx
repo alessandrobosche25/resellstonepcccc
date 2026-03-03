@@ -28,18 +28,18 @@ const registrationData = [
 function CustomTooltip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-card border border-border rounded-xl px-4 py-3 shadow-lg">
-      <p className="text-xs font-semibold text-muted-foreground mb-2">{label}</p>
+    <div className="bg-card border border-border/60 rounded-xl px-4 py-3 shadow-xl">
+      <p className="text-xs font-bold text-muted-foreground mb-2">{label}</p>
       {payload.map((entry: any, index: number) => (
         <div key={index} className="flex items-center gap-2 text-sm">
           <span
-            className="w-2 h-2 rounded-full"
+            className="w-2.5 h-2.5 rounded-full"
             style={{ backgroundColor: entry.color }}
           />
-          <span className="text-card-foreground font-medium">
+          <span className="text-foreground font-medium">
             {entry.name === "marmisti" ? "Marmisti" : "Fornitori"}:
           </span>
-          <span className="text-card-foreground font-bold">{entry.value}</span>
+          <span className="text-foreground font-bold">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -48,10 +48,10 @@ function CustomTooltip({ active, payload, label }: any) {
 
 export function RegistrationChart() {
   return (
-    <div className="bg-card rounded-2xl border border-border p-6">
+    <div className="bg-card rounded-2xl border border-border/60 p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-base font-semibold text-card-foreground">
+          <h3 className="text-base font-bold text-foreground tracking-tight">
             Trend Registrazioni
           </h3>
           <p className="text-sm text-muted-foreground mt-0.5">
@@ -59,15 +59,15 @@ export function RegistrationChart() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-chart-1" />
-            <span className="text-xs font-medium text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-[#6033E1]" />
+            <span className="text-xs font-semibold text-muted-foreground">
               Marmisti
             </span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-chart-2" />
-            <span className="text-xs font-medium text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-[#10b981]" />
+            <span className="text-xs font-semibold text-muted-foreground">
               Fornitori
             </span>
           </div>
@@ -79,48 +79,48 @@ export function RegistrationChart() {
           <AreaChart data={registrationData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorMarmisti" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="oklch(0.45 0.15 240)" stopOpacity={0.2} />
-                <stop offset="95%" stopColor="oklch(0.45 0.15 240)" stopOpacity={0} />
+                <stop offset="5%" stopColor="#6033E1" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#6033E1" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="colorFornitori" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="oklch(0.60 0.14 175)" stopOpacity={0.2} />
-                <stop offset="95%" stopColor="oklch(0.60 0.14 175)" stopOpacity={0} />
+                <stop offset="5%" stopColor="#10b981" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
-              stroke="oklch(0.92 0.005 240)"
+              stroke="#e5e7eb"
             />
             <XAxis
               dataKey="month"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "oklch(0.55 0.015 240)" }}
+              tick={{ fontSize: 12, fill: "#6b7280" }}
             />
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "oklch(0.55 0.015 240)" }}
+              tick={{ fontSize: 12, fill: "#6b7280" }}
             />
             <Tooltip content={<CustomTooltip />} />
             <Area
               type="monotone"
               dataKey="marmisti"
-              stroke="oklch(0.45 0.15 240)"
+              stroke="#6033E1"
               strokeWidth={2.5}
               fill="url(#colorMarmisti)"
               dot={false}
-              activeDot={{ r: 5, strokeWidth: 2, stroke: "oklch(0.45 0.15 240)", fill: "white" }}
+              activeDot={{ r: 5, strokeWidth: 2, stroke: "#6033E1", fill: "white" }}
             />
             <Area
               type="monotone"
               dataKey="fornitori"
-              stroke="oklch(0.60 0.14 175)"
+              stroke="#10b981"
               strokeWidth={2.5}
               fill="url(#colorFornitori)"
               dot={false}
-              activeDot={{ r: 5, strokeWidth: 2, stroke: "oklch(0.60 0.14 175)", fill: "white" }}
+              activeDot={{ r: 5, strokeWidth: 2, stroke: "#10b981", fill: "white" }}
             />
           </AreaChart>
         </ResponsiveContainer>
