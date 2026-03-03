@@ -31,18 +31,18 @@ const searchedMaterials = [
 function CustomTooltip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-card border border-border rounded-xl px-4 py-3 shadow-lg">
-      <p className="text-xs font-semibold text-muted-foreground mb-1">{label}</p>
-      <p className="text-sm font-bold text-card-foreground">{payload[0].value}</p>
+    <div className="bg-card border border-border/60 rounded-xl px-4 py-3 shadow-xl">
+      <p className="text-xs font-bold text-muted-foreground mb-1">{label}</p>
+      <p className="text-sm font-bold text-foreground">{payload[0].value}</p>
     </div>
   );
 }
 
 export function PublishedMaterialsChart() {
   return (
-    <div className="bg-card rounded-2xl border border-border p-6">
+    <div className="bg-card rounded-2xl border border-border/60 p-6 shadow-sm">
       <div className="mb-6">
-        <h3 className="text-base font-semibold text-card-foreground">
+        <h3 className="text-base font-bold text-foreground tracking-tight">
           Materiali Pubblicati
         </h3>
         <p className="text-sm text-muted-foreground mt-0.5">
@@ -59,13 +59,13 @@ export function PublishedMaterialsChart() {
             <CartesianGrid
               strokeDasharray="3 3"
               horizontal={false}
-              stroke="oklch(0.92 0.005 240)"
+              stroke="#e5e7eb"
             />
             <XAxis
               type="number"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "oklch(0.55 0.015 240)" }}
+              tick={{ fontSize: 12, fill: "#6b7280" }}
             />
             <YAxis
               type="category"
@@ -73,14 +73,14 @@ export function PublishedMaterialsChart() {
               axisLine={false}
               tickLine={false}
               width={110}
-              tick={{ fontSize: 12, fill: "oklch(0.55 0.015 240)" }}
+              tick={{ fontSize: 12, fill: "#6b7280" }}
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="count"
-              fill="oklch(0.45 0.15 240)"
-              radius={[0, 6, 6, 0]}
-              barSize={24}
+              fill="#6033E1"
+              radius={[0, 8, 8, 0]}
+              barSize={22}
             />
           </BarChart>
         </ResponsiveContainer>
@@ -91,9 +91,9 @@ export function PublishedMaterialsChart() {
 
 export function SearchedMaterialsChart() {
   return (
-    <div className="bg-card rounded-2xl border border-border p-6">
+    <div className="bg-card rounded-2xl border border-border/60 p-6 shadow-sm">
       <div className="mb-6">
-        <h3 className="text-base font-semibold text-card-foreground">
+        <h3 className="text-base font-bold text-foreground tracking-tight">
           Materiali Ricercati
         </h3>
         <p className="text-sm text-muted-foreground mt-0.5">
@@ -110,13 +110,13 @@ export function SearchedMaterialsChart() {
             <CartesianGrid
               strokeDasharray="3 3"
               horizontal={false}
-              stroke="oklch(0.92 0.005 240)"
+              stroke="#e5e7eb"
             />
             <XAxis
               type="number"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "oklch(0.55 0.015 240)" }}
+              tick={{ fontSize: 12, fill: "#6b7280" }}
             />
             <YAxis
               type="category"
@@ -124,14 +124,14 @@ export function SearchedMaterialsChart() {
               axisLine={false}
               tickLine={false}
               width={130}
-              tick={{ fontSize: 12, fill: "oklch(0.55 0.015 240)" }}
+              tick={{ fontSize: 12, fill: "#6b7280" }}
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey="searches"
-              fill="oklch(0.60 0.14 175)"
-              radius={[0, 6, 6, 0]}
-              barSize={24}
+              fill="#10b981"
+              radius={[0, 8, 8, 0]}
+              barSize={22}
             />
           </BarChart>
         </ResponsiveContainer>

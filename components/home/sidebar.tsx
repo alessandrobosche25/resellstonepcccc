@@ -115,15 +115,17 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "h-screen bg-sidebar fixed left-0 top-0 z-40 flex flex-col transition-all duration-300 ease-in-out",
+        "h-screen bg-sidebar fixed left-0 top-0 z-40 flex flex-col transition-all duration-300 ease-in-out shadow-xl",
         expanded ? "w-64" : "w-[72px]"
       )}
     >
       {/* Logo area */}
-      <div className={cn(
-        "flex items-center h-16 border-b border-sidebar-border px-4",
-        expanded ? "justify-between" : "justify-center"
-      )}>
+      <div
+        className={cn(
+          "flex items-center h-16 border-b border-sidebar-border/60 px-4",
+          expanded ? "justify-between" : "justify-center"
+        )}
+      >
         {expanded ? (
           <Link href="/home" className="flex items-center gap-3">
             <div className="relative w-8 h-8 flex-shrink-0">
@@ -135,7 +137,7 @@ export function Sidebar() {
                 className="w-full h-full object-contain brightness-0 invert"
               />
             </div>
-            <span className="text-sidebar-foreground font-semibold text-base tracking-tight">
+            <span className="text-sidebar-foreground font-bold text-base tracking-tight">
               Resellstone
             </span>
           </Link>
@@ -157,28 +159,32 @@ export function Sidebar() {
       {/* Toggle button */}
       <button
         onClick={toggleSidebar}
-        className="absolute -right-3 top-[72px] bg-card text-muted-foreground border border-border rounded-full p-1 cursor-pointer transition-all hover:bg-accent hover:text-foreground shadow-sm z-50"
+        className="absolute -right-3 top-20 bg-card text-muted-foreground border border-border rounded-full p-1.5 cursor-pointer transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary shadow-lg z-50"
+        aria-label={expanded ? "Comprimi sidebar" : "Espandi sidebar"}
       >
         {expanded ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
       </button>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4 scrollbar-thin">
+      <nav className="flex-1 overflow-y-auto py-5 scrollbar-thin">
         {sections.map((section) => (
-          <div key={section.title} className="mb-4">
+          <div key={section.title} className="mb-5">
             {expanded && (
-              <div className="px-5 mb-2">
-                <p className="text-[11px] font-semibold text-sidebar-foreground/40 uppercase tracking-widest">
+              <div className="px-5 mb-2.5">
+                <p className="text-[10px] font-bold text-sidebar-foreground/35 uppercase tracking-[0.15em]">
                   {section.title}
                 </p>
               </div>
             )}
             {!expanded && (
-              <div className="mx-auto mb-2 w-8 border-t border-sidebar-border" />
+              <div className="mx-auto mb-2.5 w-8 border-t border-sidebar-border/40" />
             )}
-            <ul className="flex flex-col gap-0.5 px-3">
+            <ul className="flex flex-col gap-1 px-3">
               {section.items.map((item) => {
-                const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                const isActive =
+                  pathname === item.href ||
+                  pathname.startsWith(item.href + "/");
+                const Icon = item.icon;
                 return (
                   <li key={item.href}>
                     <Link
@@ -188,30 +194,34 @@ export function Sidebar() {
                         expanded ? "" : "justify-center",
                         isActive
                           ? "bg-sidebar-accent text-sidebar-primary-foreground"
-                          : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                          : "text-sidebar-foreground/65 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
                       )}
                       title={!expanded ? item.label : undefined}
                     >
                       {isActive && (
                         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-full" />
                       )}
-                      <item.icon className={cn(
-                        "h-[18px] w-[18px] flex-shrink-0 transition-colors",
-                        isActive ? "text-primary" : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/70"
-                      )} />
+                      <Icon
+                        className={cn(
+                          "h-[18px] w-[18px] flex-shrink-0 transition-colors",
+                          isActive
+                            ? "text-primary"
+                            : "text-sidebar-foreground/45 group-hover:text-sidebar-foreground/70"
+                        )}
+                      />
                       {expanded && (
                         <span className="whitespace-nowrap truncate">
                           {item.label}
                         </span>
                       )}
                       {expanded && item.badge && (
-                        <span className="ml-auto text-[10px] font-semibold bg-primary/20 text-primary px-1.5 py-0.5 rounded-md">
+                        <span className="ml-auto text-[10px] font-bold bg-primary/20 text-primary px-1.5 py-0.5 rounded-md">
                           {item.badge}
                         </span>
                       )}
                       {/* Tooltip for collapsed sidebar */}
                       {!expanded && (
-                        <div className="absolute left-full ml-3 px-2.5 py-1.5 bg-foreground text-background text-xs font-medium rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50 shadow-lg">
+                        <div className="absolute left-full ml-3 px-3 py-2 bg-sidebar text-sidebar-foreground text-xs font-medium rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50 shadow-xl border border-sidebar-border">
                           {item.label}
                         </div>
                       )}
@@ -225,11 +235,11 @@ export function Sidebar() {
       </nav>
 
       {/* Footer - User + Logout */}
-      <div className="border-t border-sidebar-border p-3">
+      <div className="border-t border-sidebar-border/60 p-3">
         {/* User info */}
         {expanded ? (
-          <div className="flex items-center gap-3 px-2 py-2 mb-2">
-            <div className="relative h-9 w-9 rounded-xl overflow-hidden bg-sidebar-accent flex-shrink-0 ring-2 ring-sidebar-border">
+          <div className="flex items-center gap-3 px-2 py-2.5 mb-2 rounded-xl bg-sidebar-accent/30">
+            <div className="relative h-9 w-9 rounded-xl overflow-hidden bg-sidebar-accent flex-shrink-0 ring-2 ring-sidebar-border/50">
               <Image
                 src={auth?.user?.fileBase64 || "/img/default-avatar.png"}
                 alt="Profile"
@@ -242,14 +252,14 @@ export function Sidebar() {
               <p className="text-sm font-semibold text-sidebar-foreground truncate leading-tight">
                 {auth?.user?.nomeAzienda || "Azienda"}
               </p>
-              <p className="text-[11px] text-sidebar-foreground/50 truncate">
+              <p className="text-[11px] text-sidebar-foreground/45 truncate">
                 {auth?.user?.email || "email@example.com"}
               </p>
             </div>
           </div>
         ) : (
           <div className="flex justify-center mb-2">
-            <div className="relative h-9 w-9 rounded-xl overflow-hidden bg-sidebar-accent ring-2 ring-sidebar-border">
+            <div className="relative h-9 w-9 rounded-xl overflow-hidden bg-sidebar-accent ring-2 ring-sidebar-border/50">
               <Image
                 src={auth?.user?.fileBase64 || "/img/default-avatar.png"}
                 alt="Profile"
@@ -265,15 +275,13 @@ export function Sidebar() {
           onClick={handleLogout}
           disabled={isLoggingOut}
           className={cn(
-            "flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-sidebar-foreground/60 hover:bg-destructive/10 hover:text-destructive",
+            "flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-sidebar-foreground/55 hover:bg-red-500/10 hover:text-red-400",
             expanded ? "" : "justify-center"
           )}
           title={!expanded ? "Esci" : undefined}
         >
           <LogOut className="h-[18px] w-[18px] flex-shrink-0" />
-          {expanded && (
-            <span>{isLoggingOut ? "Uscita..." : "Esci"}</span>
-          )}
+          {expanded && <span>{isLoggingOut ? "Uscita..." : "Esci"}</span>}
         </button>
       </div>
     </aside>
