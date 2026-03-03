@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const protectedRoutes = ["/home","/addProducts","/help","/profilo","/notifiche","/impostazioni"];
+  const protectedRoutes = ["/home","/addProducts","/help","/profilo","/notifiche","/impostazioni","/admin","/admin/utenti","/admin/abbonamenti","/admin/prodotti","/admin/monitoraggio","/ricerca","/preferiti","/fornitore","/statistiche","/boost"];
 
   if (protectedRoutes.includes(pathname)) {
     console.log("ora sono in:", pathname);
