@@ -161,12 +161,8 @@ export default function Magazzino({ searchQuery }: { searchQuery: string }) {
   };
 
   return (
-    <main
-      className={cn(
-        "pt-16 min-h-screen bg-gray-50 transition-all",
-        expanded ? "ml-64 lg:ml-64" : "ml-20 lg:ml-20",
-        "ml-0 sm:ml-20"
-      )}
+    <div
+      className="min-h-screen bg-background transition-all"
     >
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-[-50px]">
         {/* Stats Cards */}
@@ -561,6 +557,6 @@ export default function Magazzino({ searchQuery }: { searchQuery: string }) {
           />
         </Modal>
       )}
-    </main>
+    </div>
   );
 }
