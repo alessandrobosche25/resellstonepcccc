@@ -9,6 +9,7 @@ import {
   Rocket,
   TrendingUp,
   TrendingDown,
+  type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +18,7 @@ type KpiCardData = {
   value: string;
   change: string;
   changeType: "positive" | "negative" | "neutral";
-  icon: React.ElementType;
+  icon: LucideIcon;
   iconColor: string;
   iconBg: string;
 };
@@ -82,14 +83,16 @@ const kpiData: KpiCardData[] = [
 export function KpiCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-      {kpiData.map((kpi) => (
+      {kpiData.map((kpi) => {
+        const Icon = kpi.icon;
+        return (
         <div
           key={kpi.title}
           className="bg-card rounded-2xl border border-border p-5 hover:shadow-md transition-shadow duration-200 group"
         >
           <div className="flex items-start justify-between mb-4">
             <div className={cn("p-2.5 rounded-xl", kpi.iconBg)}>
-              <kpi.icon className={cn("h-5 w-5", kpi.iconColor)} />
+              <Icon className={cn("h-5 w-5", kpi.iconColor)} />
             </div>
             <div
               className={cn(
@@ -116,7 +119,8 @@ export function KpiCards() {
             <p className="text-sm text-muted-foreground mt-1">{kpi.title}</p>
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
