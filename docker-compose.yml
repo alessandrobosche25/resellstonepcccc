@@ -1,0 +1,32 @@
+services:
+  resellstone-pc:
+    build:
+      context: .
+      network: host
+    container_name: resellstone-pc
+    restart: unless-stopped
+    
+    # Qui colleghi il container alle reti
+    networks:
+      - default     # La sua rete personale
+      - http        # Per uscire su internet/traefik (se lo usi)
+      - mongo_net   # <--- IL COLLEGAMENTO AL DATABASE
+
+    environment:
+      # Qui mettiamo i segreti direttamente o via file .env
+      - DASHBOARD_USER=admin
+      - DASHBOARD_PASS=GHESBORObgcr*
+      # IMPORTANTE: Qui 'mongo' funzionerà perché siamo sulla stessa rete!
+      - MONGO_URI=mongodb://resellstone:resellstone@mongo:27017/ 
+      # (Assicurati che JWT_SECRET sia nel file .env)
+
+# Definizione delle reti
+networks:
+  http:
+    name: http
+    external: true
+  
+  # Definiamo il collegamento alla rete del database
+  mongo_net:
+    external: true
+    name: resellstone_dbnet  # <--- QUESTO È IL NOME CHE ABBIAMO VISTO CON 'docker network ls'
